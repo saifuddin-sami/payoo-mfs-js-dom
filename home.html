@@ -28,7 +28,8 @@
                             </div>
                             <!-- Balance -->
                             <div>
-                                <h3 class="text-[rgba(8,8,8,0.9)] font-extrabold text-[18px]"> <span id="balance">4500</span>/- </h3>
+                                <h3 class="text-[rgba(8,8,8,0.9)] font-extrabold text-[18px]"> <span
+                                        id="balance">4500</span>/- </h3>
                                 <p class="text-[rgba(8,8,8,0.5)] text-[14px]"> Available Balance</p>
                             </div>
                         </div>
@@ -96,45 +97,47 @@
             document.getElementById('cash-out-container').classList.add('hidden');
         })
         // Add Money 
-        document.getElementById('add-btn').addEventListener('click', function(event) {
+        document.getElementById('add-btn').addEventListener('click', function (event) {
             event.preventDefault();
             const amount = parseFloat(document.getElementById('input-amount').value);
             const pin = document.getElementById('input-pin').value;
             const currentBalance = parseFloat(document.getElementById('balance').innerText);
-            
+
             if (pin.length == 4 && pin === '1234') {
-                const newBalance = currentBalance + amount; 
+                const newBalance = currentBalance + amount;
                 document.getElementById('balance').innerText = newBalance;
+                alert('Transaction Successful! Your new balance is ' + newBalance);
             }
             else {
-                alert('Invalid Amount, Please Try Again'); 
+                alert('Invalid Amount, Please Try Again');
             }
-            
+
         })
         // Cash Out Pop Up 
         document.getElementById('cash-out').addEventListener('click', function () {
             document.getElementById('cash-out-container').classList.remove('hidden');
             document.getElementById('add-money-container').classList.add('hidden');
         })
-        // Cash Out 
+        // Cash Out
         document.getElementById('cash-out-btn').addEventListener('click', function (event) {
             event.preventDefault();
             const amount = parseFloat(document.getElementById('cash-out-amount').value);
             const pin = document.getElementById('input-pin2').value;
             const currentBalance = parseFloat(document.getElementById('balance').innerText);
 
-            if (pin.length == 4 && pin === '1234') {
-                const newBalance = currentBalance - amount; 
-                document.getElementById('balance').innerText = newBalance;
-                if (newBalance < 0) {
-                    document.getElementById('balance').innerText = 0;
-                    alert('Not Enough Money, Please Add Money To Your Account'); 
-                } 
+            // Check for valid pin
+            if (pin.length === 4 && pin === '1234') {
+                if (amount > currentBalance) {
+                    alert('Not Enough Money, Please Add Money To Your Account');
+                } else {
+                    const newBalance = currentBalance - amount;
+                    document.getElementById('balance').innerText = newBalance;
+                    alert('Transaction Successful! Your new balance is ' + newBalance);
+                }
+            } else {
+                alert('Invalid Input, Please Try Again');
             }
-            else {
-                alert('Invalid Amount, Please Try Again'); 
-            }
-        })
+        });
     </script>
 </body>
 
