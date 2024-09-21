@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payoo Home</title>
+    <link rel="shortcut icon" href="payoo.png" type="image/x-icon">
+    <!-- Daisy Ui And Tailwind Css Cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="payoo.png" type="image/x-icon">
+</head>
+
+<body>
+    <main class="flex justify-center h-screen items-center">
+        <div class="mockup-phone">
+            <div class="camera"></div>
+            <div class="display">
+                <div class="artboard artboard-demo phone-1 bg-[#f4f5f7]">
+                    <!-- Nav -->
+                    <div class="flex items-center justify-between  w-[90%]">
+                        <!-- Balance Part -->
+                        <div class="flex justify-center items-center gap-2">
+                            <!-- Logo -->
+                            <div>
+                                <img src="payoo.png" alt="" class="w-12">
+                            </div>
+                            <!-- Balance -->
+                            <div>
+                                <h3 class="text-[rgba(8,8,8,0.9)] font-extrabold text-[18px]"> <span id="balance">4500</span>/- </h3>
+                                <p class="text-[rgba(8,8,8,0.5)] text-[14px]"> Available Balance</p>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="log-out-btn"
+                                class="px-3 py-2.5 text-[14px] text-[rgba(8,8,8,0.5)] rounded-lg border border-[rgba(8,8,8,0.5)] cursor-pointer active:scale-95 transition-all ease-in duration-100 hover:bg-[rgba(8,8,8,0.5)] hover:text-white hover:border-transparent">
+                                Log Out </button>
+                        </div>
+                    </div>
+                    <!-- Divider -->
+                    <div class="divider w-full"></div>
+                    <!-- Buttons -->
+                    <div class="flex justify-between w-[90%]">
+                        <button id="add-money"
+                            class="px-3 py-2.5 text-[14px] text-[rgba(8,8,8,0.5)] rounded-lg border border-[rgba(8,8,8,0.5)] cursor-pointer active:scale-95 transition-all ease-in duration-100 hover:bg-[rgba(8,8,8,0.5)] hover:text-white hover:border-transparent">
+                            Add Money </button>
+                        <button id="cash-out"
+                            class="px-3 py-2.5 text-[14px] text-[rgba(8,8,8,0.5)] rounded-lg border border-[rgba(8,8,8,0.5)] cursor-pointer active:scale-95 transition-all ease-in duration-100 hover:bg-[rgba(8,8,8,0.5)] hover:text-white hover:border-transparent">
+                            Cashout </button>
+                    </div>
+
+                    <!-- Add Money -->
+                    <div class="w-[90%] hidden" id="add-money-container">
+                        <h4 class="text-[#080808] text-[20px] font-bold mt-5 mb-3"> Add Money </h4>
+                        <form action="" class="bg-white px-3 py-5 rounded-2xl">
+                            <h3 class="text-[#080808] text-[16px] font-medium mb-3"> Amount </h3>
+                            <input type="number" id="input-amount" placeholder="Enter Amount"
+                                class="mb-4 bg-[#F4F5F7] focus:outline-gray-700 text-[#080808] rounded-[12px] px-5 py-4 w-full">
+                            <h3 class="text-[#080808] text-[16px] font-medium mb-3"> 4 Digit Pin </h3>
+                            <input type="password" autocomplete="off" id="input-pin" placeholder="Enter 4 Digit Pin"
+                                class="mb-4 bg-[#F4F5F7] focus:outline-gray-700 text-[#080808] rounded-[12px] px-5 py-4 w-full">
+                            <button id="add-btn"
+                                class="text-[20px] font-semibold py-3 text-white w-full bg-[#0874F2] rounded-[12px]">
+                                Add Money </button>
+                        </form>
+                    </div>
+                    <!-- Cash Out -->
+                    <div class="w-[90%] hidden" id="cash-out-container">
+                        <h4 class="text-[#080808] text-[20px] font-bold mt-5 mb-3"> Cash Out </h4>
+                        <form action="" class="bg-white px-3 py-5 rounded-2xl">
+                            <h3 class="text-[#080808] text-[16px] font-medium mb-3"> Amount </h3>
+                            <input type="number" id="cash-out-amount" placeholder="Enter Amount"
+                                class="mb-4 bg-[#F4F5F7] focus:outline-gray-700 text-[#080808] rounded-[12px] px-5 py-4 w-full">
+                            <h3 class="text-[#080808] text-[16px] font-medium mb-3"> 4 Digit Pin </h3>
+                            <input type="password" autocomplete="off" id="input-pin2" placeholder="Enter 4 Digit Pin"
+                                class="mb-4 bg-[#F4F5F7] focus:outline-gray-700 text-[#080808] rounded-[12px] px-5 py-4 w-full">
+                            <button id="cash-out-btn"
+                                class="text-[20px] font-semibold py-3 text-white w-full bg-[#0874F2] rounded-[12px]">
+                                Cash Out </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </main>
+    <script>
+        // Log Out
+        document.getElementById('log-out-btn').addEventListener('click', function () {
+            window.location.href = "index.html";
+        })
+        // Add Money Pop Up
+        document.getElementById('add-money').addEventListener('click', function () {
+            document.getElementById('add-money-container').classList.remove('hidden');
+            document.getElementById('cash-out-container').classList.add('hidden');
+        })
+        // Add Money 
+        document.getElementById('add-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('input-amount').value);
+            const pin = document.getElementById('input-pin').value;
+            const currentBalance = parseFloat(document.getElementById('balance').innerText);
+            
+            if (pin.length == 4 && pin === '1234') {
+                const newBalance = currentBalance + amount; 
+                document.getElementById('balance').innerText = newBalance;
+            }
+            else {
+                alert('Invalid Amount, Please Try Again'); 
+            }
+            
+        })
+        // Cash Out Pop Up 
+        document.getElementById('cash-out').addEventListener('click', function () {
+            document.getElementById('cash-out-container').classList.remove('hidden');
+            document.getElementById('add-money-container').classList.add('hidden');
+        })
+        // Cash Out 
+        document.getElementById('cash-out-btn').addEventListener('click', function (event) {
+            event.preventDefault();
+            const amount = parseFloat(document.getElementById('cash-out-amount').value);
+            const pin = document.getElementById('input-pin2').value;
+            const currentBalance = parseFloat(document.getElementById('balance').innerText);
+
+            if (pin.length == 4 && pin === '1234') {
+                const newBalance = currentBalance - amount; 
+                document.getElementById('balance').innerText = newBalance;
+                if (newBalance < 0) {
+                    document.getElementById('balance').innerText = 0;
+                    alert('Not Enough Money, Please Add Money To Your Account'); 
+                } 
+            }
+            else {
+                alert('Invalid Amount, Please Try Again'); 
+            }
+        })
+    </script>
+</body>
+
+</html>
